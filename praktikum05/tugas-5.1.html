@@ -1,62 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tugas 5.1</title>
-	<style type="text/css">
-		div {
-			border: 2px solid darkblue;
-			box-sizing: border-box;
-		}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 5.1</title>
+    <style>
+        .container {
+            padding: 40px 30px;
+            position: relative;
+        }
 
-		.container {
-			width: 95%;
-			height: 500px;
-			padding: 15px 10px;
-			margin: 15px 20px;
-			position: relative;
-		}
+        .container > div {
+            width: 300px;
+            height: 800px;
+            border: 3px solid black;
+            position: absolute;
+        }
 
-		.box-yellow {
-			width: 20%;
-			height: 93%;
-			position: absolute;
-			background-color: lightyellow;
-			left: 5%;
-		}
+        .box1 {
+            background-color: rgb(255, 255, 109);
+            left: 100px;
+        }
 
-		.box-orange {
-			width: 20%;
-			height: 93%;
-			position: absolute;
-			background-color: orangered;
-			left: 28%;
-		}
+        .box2 {
+            background-color: rgb(255, 115, 0);
+            left: 567px;
+        }
 
-		.box-green {
-			width: 20%;
-			height: 93%;
-			position: absolute;
-			background-color: lightgreen;
-			right: 28%;
-		}
+        .box3 {
+            background-color: rgb(173, 199, 122);
+            right: 567px;
+        }
 
-		.box-blue {
-			width: 20%;
-			height: 93%;
-			position: absolute;
-			background-color: cyan;
-			right: 5%;
-		}
-	</style>
+        .box4 {
+            background-color: aqua;
+            right: 100px;
+        }
+    </style>
 </head>
-<body bgcolor="whitesmoke">
-	<div class="container">
-		<div class="box-yellow"></div>
-		<div class="box-orange"></div>
-		<div class="box-green"></div>
-		<div class="box-blue"></div>
-	</div>
+<body>
+    <div class="container">
+        <div class="box1"></div>
+        <div class="box2"></div>
+        <div class="box3"></div>
+        <div class="box4"></div>
+    </div>
 </body>
 </html>
