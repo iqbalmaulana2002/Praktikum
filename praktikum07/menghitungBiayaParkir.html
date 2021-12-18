@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menghitung Biaya parkir</title>
+</head>
+<body>
+    <label for="jamMasuk">Jam Masuk : </label>
+    <input type="text" id="jamMasuk">
+    <br><br>
+    <label for="jamKeluar">Jam Keluar : </label>
+    <input type="text" id="jamKeluar">
+    <br><br>
+    <button onclick="hitung()">Hitung Biaya Parkir</button>
+    <br><br>
+    Biaya Parkir : <span id="biaya"></span>
+
+    <script>
+        function hitung() {
+            const jk = Number(jamKeluar.value)
+            const jm = Number(jamMasuk.value)
+            if (!jk || !jm) return false
+
+            const jmlJam = jk - jm
+            let hasil = 0
+            if (jmlJam <= 2) {
+                hasil = 3000
+            } else {
+                const tambahan = (jmlJam - 2) * 1000
+                hasil = 3000 + tambahan
+            }
+
+            biaya.innerHTML = 'Rp. '+hasil
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menghitung Luas dan Keliling Lingkaran</title>
+</head>
+<body>
+    <br><br>
+    <input type="text" id="jari-jari">
+    <br><br>
+    <button onclick="hitungLuas()">Hitung Luas</button>
+    <button onclick="hitungKeliling()">Hitung Keliling</button>
+    <br><br>
+    <div class="info">
+        <div style="margin-bottom: 7px;">
+            Luas : <span id="luas"></span>
+        </div>
+        <div>
+            Keliling : <span id="keliling"></span>
+        </div>
+    </div>
+
+    <script>
+        const txtJariJari = document.getElementById('jari-jari');
+        function hitungLuas() {
+            const jariJari = Number(txtJariJari.value)
+            if (!jariJari) return false;
+
+            let hasil = 0
+            if (jariJari % 7 == 0) {
+                hasil = 22 * (jariJari / 7) * jariJari
+            } else {
+                hasil = 3.14 * jariJari**2
+            }
+
+            luas.innerHTML = hasil
+        }
+
+        function hitungKeliling() {
+            const jariJari = Number(txtJariJari.value)
+            if (!jariJari) return false;
+
+            let hasil = 0
+            if (jariJari % 7 == 0) {
+                hasil = 2 * 22 * (jariJari / 7)
+            } else {
+                hasil = 2 * 3.14 * jariJari
+            }
+
+            keliling.innerHTML = hasil
+        }
+    </script>
+</body>
+</html>

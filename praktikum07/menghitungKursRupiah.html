@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menghitung Kurs Rupiah</title>
+</head>
+<body>
+    <input type="text" id="rp">
+    <button onclick="hitung()">Hitung</button>
+    <br><br>
+    Hasil : <span id="hasil"></span>
+
+    <script>
+        function hitung() {
+            if (rp.value < 14650) return false
+
+            let jml = rp.value / 14650
+            console.log(jml)
+            jml = String(jml).split('.')
+            hasil.innerHTML = '$'+jml[0]+'.'+jml[1][0]+jml[1][1]+jml[1][2]
+        }
+    </script>
+</body>
+</html>
