@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kurs Rupiah</title>
+</head>
+<body>
+	<fieldset>
+		<legend>Kurs Rupiah - Mata Uang Asing</legend>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Masukkan Nilai</th>
+					<th>Valas</th>
+					<th>Nilai Rupiah</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="text" id="txtNilai"></td>
+					<td>
+						<select id="cmbValas">
+							<option value="9915">Dollar US</option>
+							<option value="13472">Dollar Singapore</option>
+							<option value="874">Ringgit Malaysia</option>
+							<option value="120">Yen Jepang</option>
+							<option value="15888">Euro</option>
+							<option value="3592">Riyal Arab Saudi</option>
+						</select>
+					</td>
+					<td><input type="text" id="hasil" readonly></td>
+				</tr>
+			</tbody>
+		</table>
+	</fieldset>
+
+	<script type="text/javascript">
+		const txtNilai = document.getElementById('txtNilai')
+		const cmbValas = document.getElementById('cmbValas')
+
+		txtNilai.addEventListener('keyup', function ({target}) {
+			const nilai = Number(target.value)
+			if (!nilai) {
+				return false
+			}
+
+			hasil.value = 'Rp. '+nilai * Number(cmbValas.value)
+		})
+
+		cmbValas.addEventListener('change', function ({target}) {
+			const nilai = Number(txtNilai.value)
+			if (!nilai) {
+				return false
+			}
+
+			hasil.value = 'Rp. '+nilai * Number(target.value)
+		})
+	</script>
+</body>
+</html>

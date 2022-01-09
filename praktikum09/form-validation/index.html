@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form Validation</title>
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+		}
+
+		input {
+			margin-top: 3px;
+			width: 100%;
+		}
+
+		.err-msg {
+			font-size: 12px;
+			color: red;
+		}
+
+		.mb-2 {
+			margin-bottom: 9px;
+		}
+	</style>
+</head>
+<body>
+	<form action="" method="POST" id="formPendaftaran" style="margin-left: 15px; width: 400px;">
+		<h2>Form Pendaftaran</h2>
+		<div id="group1">
+			<label for="nama">Nama Pelanggan</label>
+			<br>
+			<input type="text" name="Nama Pelanggan" id="nama" autocomplete="off" placeholder="Nama Lengkap">
+			<span class="err-msg"></span>
+		</div>
+		<br>
+		<div id="group2">
+			<label for="email">Email</label>
+			<br>
+			<input type="text" name="Email" id="email" autocomplete="off" placeholder="contoh@gmail.com">
+			<span class="err-msg"></span>
+		</div>
+		<br>
+		<div id="group3">
+			<label for="jam">Jam Keberangkatan</label>
+			<br>
+			<input type="text" name="Jam Keberangkatan" id="jam" autocomplete="off" placeholder="contoh: 10.00">
+			<span class="err-msg"></span>
+		</div>
+		<br>
+		<div id="group4">
+			<label for="tujuan">Tujuan Keberangkatam</label>
+			<br>
+			<input type="text" name="Tujuan Keberangkatam" id="tujuan" autocomplete="off" placeholder="Tujuan">
+			<span class="err-msg"></span>
+		</div>
+		<br>
+		<div id="group5">
+			<label for="jml">Jumlah Tiket</label>
+			<br>
+			<input type="number" name="Jumlah Tiket" id="jml" placeholder="Jumlah">
+			<span class="err-msg"></span>
+		</div>
+		<br>
+		<div style="width: 100%; text-align: right;">
+			<button type="submit">Submit</button>
+		</div>
+	</form>
+
+	<div id="dataPelanggan" style="margin: 35px 15px 15px 15px; width: 500px; display: none;"></div>
+
+	<script type="text/javascript">
+		formPendaftaran.addEventListener('submit', function (e) {
+			e.preventDefault()
+			const {target} = e
+
+			let formValidation = true
+			for (let i = 0; i <= 4; i++) {
+				if (target[i].value == '') {
+					addError(target, i, 'tidak boleh kosong')
+					formValidation = false
+					continue
+				} else {
+					removeError(target, i)
+				}
+
+				if (i == 0) {
+					if (target[i].value.length > 30) {
+						addError(target, i, 'maksimal 30 karakter')
+						formValidation = false
+						continue
+					}
+				}
+
+				if (i == 1) {
+					if (target[i].value.length < 4) {
+						addError(target, i, 'tidak valid')
+						formValidation = false
+						continue
+					}
+
+					let error = true
+					for (let e = 0; e < target[i].value.length; e++) {
+						if (target[i].value[e] == '@') {
+							if (error) {
+								error = false
+							} else {
+								error = true
+								break
+							}
+						}
+					}
+					if (error) {
+						addError(target, i, 'tidak valid')
+						formValidation = false
+						continue
+					}
+
+					if (target[i].value.split('@')[0].length < 3 || target[i].value.split('@')[1].length < 4) {
+						addError(target, i, 'tidak valid')
+						formValidation = false
+						continue
+					}
+
+					error = true
+					for (let e = target[i].value.split('@')[1].length - 1; e >= 0; e--) {
+						if (target[i].value.split('@')[1][e] == '.') {
+							if (e > 1) {
+								error = false
+							}
+							break
+						}
+					}
+					if (error) {
+						addError(target, i, 'tidak valid')
+						formValidation = false
+						continue
+					}
+				}
+
+				if (i == 2) {
+					if ((target[i].value.length < 4 || target[i].value.length > 5) || (target[i].value[1] != '.' && target[i].value[2] != '.')) {
+						addError(target, i, 'tidak valid')
+						formValidation = false
+						continue
+					}
+
+					const [jam, menit] = target[i].value.split('.')
+					if (Number(jam) < 0 || Number(jam) > 23 || Number(menit) < 0 || Number(menit) > 59) {
+						addError(target, i, 'tidak valid')
+						formValidation = false
+						continue
+					}
+				}
+
+				if (i == 4) {
+					if (target[i].value < 1 || target[i].value > 10) {
+						addError(target, i, 'harus antara 1 - 10')
+						formValidation = false
+						continue
+					}
+				}
+			}
+
+			if (!formValidation) {
+				dataPelanggan.innerHTML = ''
+				dataPelanggan.style.display = 'none';
+				return false
+			}
+
+			dataPelanggan.innerHTML = `
+				<h2>Data Pelanggan</h2>
+				<ul>
+					<li class="mb-2">Nama Pelanggan : <b>${nama.value}</b></li>
+					<li class="mb-2">Email : <b>${email.value}</b></li>
+					<li class="mb-2">Jam Keberangkatan : <b>${jam.value}</b></li>
+					<li class="mb-2">Tujuan Keberangkatan : <b>${tujuan.value}</b></li>
+					<li class="mb-2">Jumlah Tiket : <b>${jml.value}</b></li>
+				</ul>`
+			dataPelanggan.style.display = ''
+		})
+
+		function addError(target, index, errMsg) {
+			target[index].style.borderColor = 'red'
+			document.getElementById('group'+(index+1)).children[3].innerHTML = target[index].name+' '+errMsg
+		}
+
+		function removeError(target, index) {
+			target[index].style.borderColor = ''
+			document.getElementById('group'+(index+1)).children[3].innerHTML = ''
+		}
+	</script>
+</body>
+</html>
